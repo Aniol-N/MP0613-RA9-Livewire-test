@@ -20,6 +20,9 @@ class Products extends Component
     #[Validate('required')]
     public $description = '';
 
+    #[Validate('required')]
+    public $price = '';
+
     public $isEdit = false;
 
     public $title = 'Add New Product';
@@ -40,6 +43,8 @@ class Products extends Component
         Product::updateOrCreate(['id' => $this->product_id], [
             'name' => $this->name,
             'description' => $this->description,
+            'price' => $this->price
+
         ]);
 
         session()->flash('message', $this->product_id ? 'Product is updated.' : 'Product is added.');
@@ -58,6 +63,8 @@ class Products extends Component
         $this->name = $product->name;
 
         $this->description = $product->description;
+
+        $this->price = $product->price;
 
         $this->isEdit = true;
     }
